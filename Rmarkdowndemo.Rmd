@@ -1,0 +1,62 @@
+---
+title: "RMarkdown demonstration"
+author: "Damon Resnick"
+date: "December 31, 2016"
+output:
+  html_document:
+    keep_md: yes
+  pdf_document: default
+  word_document: default
+---
+
+
+
+RMarkdown demonstration
+=======================
+
+Demo RMarkdown file.
+
+Let's load some data.
+
+```{r}
+library(datasets)
+data(airquality)
+summary(airquality)
+```
+
+Let's first make a pairs plot
+
+```{r}
+pairs(airquality)
+```
+
+Here's a regression model of ozone on wind, solar radiation, and temperature.
+
+```{r}
+library(stats)
+fit <- lm(Ozone ~ Wind + Solar.R + Temp, data = airquality)
+fit
+summary(fit)
+```
+
+This doesn't work quite right. Hmmm...
+
+```{r, results='asis'}
+library(xtable)
+xt <- xtable(summary(fit))
+print(xt, type = "html")
+
+library(texreg)
+htmlreg(fit)
+htmlreg(fit,single.row=TRUE)
+```
+
+
+
+Here is an unordered list.
+
+* First element
+
+* Second element
+
+
